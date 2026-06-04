@@ -5,6 +5,8 @@ from urllib.parse import urlparse
 
 import requests
 import xarray as xr
+import pandas as pd
+import matplotlib.pyplot as plt
 
 # Various conversions from the key to units_name with the multiplicative conversion factor
 unit_conversion = {
@@ -322,3 +324,55 @@ def safe_update_attrs(
         ds.attrs[key] = value
 
     return ds
+
+
+
+
+# calcualte the annual mean from AMOC daily data
+def calculate_annual_mean(amoc_daily_data: xr.DataArray) -> xr.DataArray:
+
+    if "time" in amoc_daily_data.dims:
+        amoc_daily_data = amoc_daily_data.rename({"time": "TIME"})
+    return amoc_daily_data.resample(TIME='YE').mean()
+
+
+# plot the long-term linearized trend for AMOC annual mean data
+
+def calculate_and_plot_trend(amoc_annual_series: xr.DataArray, figsize=(15, 5.5)):
+ 
+    from scipy.stats import linregress
+    
+    y_data = amoc_annual_series.values
+    years = pd.to_datetime(amoc_annual_series.TIME.values).year
+    x_data = years - years[0]
+    
+    slope, intercept, r_value, p_value, std_err = linregress(x_data, y_data)
+    trend_line = slope * x_data + intercept
+    
+    # print results
+    print('------- AMOC long-term trend----------')
+    print(f"annual mean change rate (slope): {slope:.4f} Sv/year")
+    print(f"Total change in 20 years: {slope * len(x_data):.2f} Sv")
+    print(f"p-value: {p_value: .5f}")
+
+    if p_value < 0.05:
+        print("This weakening trend is significant at 95% confidence.")
+    else:
+        print("The trend did't pass significance testing, it may be a random fluctuation.")
+    
+    print("----"*5)
+    
+    plt.figure(figsize=figsize)
+    plt.plot(years, y_data, color='crimson', marker='^', linewidth=2, label='Annual Mean')
+    plt.plot(years, trend_line, color='royalblue', linestyle='--', linewidth=2, 
+             label=f'Linear Trend ({slope:.3f} Sv/year)')
+    
+    plt.xticks(years, rotation=0) 
+    plt.title('AMOC Long-term Linear Trend at 26.5°N', fontsize=14)
+    plt.ylabel('Transport [Sv]', fontsize=12)
+    plt.xlabel('Year', fontsize=12)
+    plt.grid(True, linestyle=':', alpha=0.6)
+    plt.legend(fontsize=11)
+    plt.show()
+    
+    return {"slope": slope, "p_value": p_value, "total_change": slope * len(x_data)}
