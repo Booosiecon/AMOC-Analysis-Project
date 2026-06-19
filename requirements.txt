@@ -11,4 +11,4 @@ matplotlib>=3.7
 requests
 
 # AMOC analysis tools
-git+https://github.com/amoccommunity/amocatlas.git
+git+https://github.com/amoccommunity/amocatlas.git@v0.3.0

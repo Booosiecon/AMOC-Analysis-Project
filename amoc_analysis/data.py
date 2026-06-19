@@ -237,8 +237,15 @@ def load_clean_data():
     # 1. Load real data
     ds = read.calafat2025()
     
-    # 2. Extract MHT at 35N (lat index 4) and take mean over posterior samples
-    series = ds['MHT'].isel(lat=4).mean(dim='posterior_samples')
+    # 2. Extract MHT at 35N and take mean over the appropriate ensemble/sample dimension
+    if 'N_ENSEMBLE' in ds['MHT'].dims:
+        dim_name = 'N_ENSEMBLE'
+    elif 'posterior_samples' in ds['MHT'].dims:
+        dim_name = 'posterior_samples'
+    else:
+        dim_name = ds['MHT'].dims[1]
+
+    series = ds['MHT'].isel(lat=4).mean(dim=dim_name)
     
     # 3. Report NaNs
     nan_count = int(series.isnull().sum().item())
