@@ -69,11 +69,13 @@ def report_series_correlation_and_regression(
     # regression parameters, r-value and p-value were calculated before
     slope, intercept, _, _, stderror = stats.linregress(valid_x, valid_y)
 
+    p_str = "< 0.001" if p_val < 0.001 else f"{p_val:.3e}"
+
     print("++++++Results++++++")
     print(f"Correlation between {name_x} and {name_y}")
     print("\n")
     print(f"Valid Sample Points: {valid_x.size}")
-    print(f"Correlation(r): {r:.3f}(p-value: {p_val:.2e})")
+    print(f"Correlation(r): {r:.3f}(p-value: {p_str})")
     print(f"Variance Explained(R2): {r2:.1%}")
     print(f"Mean Bias ({name_x} - {name_y}): {mean_bias:+.3f} Sv")
     print(f"Root Mean Square Error: {rmse:.3f} Sv")
