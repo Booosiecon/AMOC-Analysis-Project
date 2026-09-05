@@ -18,17 +18,19 @@
 - Perform a depth sensitivity analysis for the 26°N UMO transport to assess the effect of different max depths on the integrated transport values.
 
 ### 1.2 Dataset
-1. `ts_gridded.nc`. Link: [rapid.ac.uk](https://rapid.ac.uk/data/gridded-mooring-data)
+1. `ts_gridded.nc`. Link: [rapid.ac.uk/data/gridded-mooring-data](https://rapid.ac.uk/data/gridded-mooring-data)
 
     - The gridded mooring data contains 5 vertical profiles, and all profiles comtain timeseries of 12-hourly temperature and salinity data gridded onto 20m intervals starting in Apr 2004.
 
-2. `moc_transports.nc`.
+2. `moc_transports.nc`. Link: [rapid.ac.uk/data/integrated-transports](https://rapid.ac.uk/data/integrated-transports)
+
+    - 12-hourly, 10-days low pass filtered transport timeseries from Apr2004 to Mar 2024.
 
 ## 2. Results and Discussion
 ### Part1 Geostrophic Transport
 
 ![Comparison of Calculated and Official UMO Transport Series](figures/Part1_Comparison_of_calculated_and_official_UMO_transport_series.png) This figure shows the comparison between the calculated UMO transport timeseries and official product. The 2 series shows very similar fluctuations, and apprently, the calclated one always higher than the official product, with the calcualted data occasionally appearing more aggressive. 
-Here is a table showing some details:
+Here is a table showing the results from the correlation analysis:
 
 | Parameter | Value |
 | :--- | :--- |
@@ -45,3 +47,12 @@ I checked the function `interior_geostrophic_transport`, which sets a fixed max 
 Besides, the function doesn't account for compensation transport, ignoring the mass-balance adjustment, while RAPID includes an external transport adjustment.
 
 Overall, ignoring the compensation transport (which is always negative) is likely the main reason for the +4.911 Sv bias, and the fixed max depth of 1100m may explain the RMSE and aggressive fluctuations in the calculated UMO transport series.
+
+Linear Regression fit:
+
+$$
+\begin{aligned} 
+\text{Official UMO} &= 0.473 \times \text{Calculated UMO} - 11.998 \\ &\text{Slope Std Error} = 0.003 
+\end{aligned}
+$$
+
