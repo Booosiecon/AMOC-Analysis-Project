@@ -1,4 +1,4 @@
-# Assignment2 Geostrophic transport and relating AMOC series -- report
+# Assignment 2 Geostrophic transport and relating AMOC series -- report
 
 - **Author** : Hengxi Yang
 - **Date** : Sep 2026
@@ -24,12 +24,15 @@
 
 2. `moc_transports.nc`. Link: [rapid.ac.uk/data/integrated-transports](https://rapid.ac.uk/data/integrated-transports)
 
-    - 12-hourly, 10-days low pass filtered transport timeseries from Apr2004 to Mar 2024.
+    - 12-hourly, 10-days low pass filtered transport timeseries from Apr 2004 to Mar 2024.
 
 ## 2. Results and Discussion
-### Part1 Geostrophic Transport
+### Part 1 Geostrophic Transport
 
-![Comparison of Calculated and Official UMO Transport Series](figures/Part1_Comparison_of_calculated_and_official_UMO_transport_series.png) This figure shows the comparison between the calculated UMO transport timeseries and official product. The 2 series shows very similar fluctuations, and apprently, the calclated one always higher than the official product, with the calcualted data occasionally appearing more aggressive. 
+![Comparison of Calculated and Official UMO Transport Series](figures/Part1_Comparison_of_calculated_and_official_UMO_transport_series.png) 
+
+This figure shows the comparison between the calculated UMO transport timeseries and official product. The 2 series shows very similar fluctuations, and apprently, the calclated one always higher than the official product, with the calcualted data occasionally appearing more aggressive. 
+
 Here is a table showing the results from the correlation analysis:
 
 | Parameter | Value |
@@ -56,3 +59,6 @@ $$
 \end{aligned}
 $$
 
+![UMO Transport Regression Analysis](figures/Part1_UMO_regression_analysis.png)
+
+The second figure shows that the fit line shifts a lot from the 1:1 reference line. The slope of 0.47 indicates that the calculated data has roughly twice the amplitude of the official data. Besides, the intercept of -12 Sv aligns with the systematic bias discussed above.
