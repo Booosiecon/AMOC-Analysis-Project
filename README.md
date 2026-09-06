@@ -38,7 +38,8 @@ amoc-analysis/
 ├── requirements.txt           
 ├── GETTING_STARTED.md  
 ├── INSTRUCTIONS.md         
-└── writeup.md                 # write-up
+├── writeup.md                 # write-up
+└──Assignment2_Report.pdf      # pdf version of writeup.md
 ```
 
 ## ✅ Aim

@@ -1,11 +1,11 @@
-# Assignment 2 Report | Geostrophic transport and relating AMOC series
+# Assignment 2 Report | Geostrophic Transport and Relating AMOC Series
 
 - **Author** : Hengxi Yang
 - **Date** : Sep 2026
 - **Course** : 63-731 Data Analysis in Physical Oceanography
 
 ## 1. Introduction
-### 1.1 Aim
+### **1.1 Aim**
 
 - Compute the 26°N UMO geostrophic transport, compare it with the official UMO product, and compute the correlation coefficient between calcualted UMO transport and the official UMO transport timeseries.
 
@@ -17,7 +17,7 @@
 
 - Perform a depth sensitivity analysis for the 26°N UMO transport to assess the effect of different max depths on the integrated transport values.
 
-### 1.2 Dataset
+### **1.2 Dataset**
 1. `ts_gridded.nc`. Link: [rapid.ac.uk/data/gridded-mooring-data](https://rapid.ac.uk/data/gridded-mooring-data)
 
     - The gridded mooring data contains 5 vertical profiles, and all profiles comtain timeseries of 12-hourly temperature and salinity data gridded onto 20m intervals starting in Apr 2004.
@@ -27,7 +27,7 @@
     - 12-hourly, 10-days low pass filtered transport timeseries from Apr 2004 to Mar 2024.
 
 ## 2. Results and Discussion
-### Part 1 Geostrophic Transport
+### **Part 1 Geostrophic Transport**
 
 ![Comparison of Calculated and Official UMO Transport Series](figures/Part1_Comparison_of_calculated_and_official_UMO_transport_series.png) 
 
@@ -68,9 +68,9 @@ The second figure shows that the fit line shifts a lot from the 1:1 reference li
 >A: At first, UMO happens in the upper layer between the surface and around 1100m depth, with 2 water masses(UNADW and LNADW) down below. Secondly, if we do the full-depth integral, the results will not tell us each layer's contribution separately.
 
 
-### Part 2 Evaluating time series
+### **Part 2 Evaluating time series**
 
-#### 2A Seasonal cycle and trend (for both the 26°N MOC and UMO)
+#### **2A Seasonal cycle and trend (for both the 26°N MOC and UMO)**
 
 ![MOC and UMO monthly climatology](figures/Part2A.1_MOC_and_UMO_Monthly_Climatology.png)
 
@@ -126,7 +126,7 @@ The project uses the `effective_dof` function to compute $N_{eff} ≈ 224$ for M
 Additionally, the p value of MOC exceeds 0.05, which means the trend lacks significance and it shouldn't be treated as a concrete conclusion.
 
 
-#### 2B Cross-correlation of 26°N and 47°N MOC
+#### **2B Cross-correlation of 26°N and 47°N MOC**
 
 26°N MOC and 47°N MOC have different timespans and sampling frequences,
 
@@ -170,7 +170,7 @@ For the deseasonalised:
 
 Clearly, the result lacks statistical significance. Therefore, it is only suggestive rather than a concrete conclusion.
 
-### Part 3 Depth Sensitivity Analysis
+### **Part 3 Depth Sensitivity Analysis**
 
 The analysis used the RAPID 26°N boundary hydrography to compute the UMO integral transport based on difference maximum depth.
 
