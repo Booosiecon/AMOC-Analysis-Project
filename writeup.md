@@ -124,6 +124,21 @@ Additionally, the p value of MOC exceeds 0.05, which means the trend lacks signi
 
 #### 2B Cross-correlation of 26°N and 47°N MOC
 
+26°N MOC and 47°N MOC have different timespans and sampling frequences,
+
+|  Variable | Start Date | End Date | Total Data Points ($N$) |
+| :--- | :--- | :--- | :--- |
+| 26°N MOC | 2004-04-06 | 2024-03-22 | 730 |
+| 47°N MOC | 1993-01-01 | 2018-01-01 | 301 |
+
+therefore the two series need to be resampled on a common time grid before cross-correlation.
+
+![Before and After Matching figure](figures/Part2B.1_26MOC_and_47_MOC_before_and_after_matching.png)
+
+
+The following figure shows the cross-correlation results for the resampled 26°N and 47°N MOC timeseries. 
+
+![Cross-Correlation 26°N and 47°N MOC](figures/Part2B.2_26MOC_and_47_MOC_cross_correlation.png)
 
 
 
