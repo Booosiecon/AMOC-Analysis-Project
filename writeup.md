@@ -31,7 +31,7 @@
 
 ![Comparison of Calculated and Official UMO Transport Series](figures/Part1_Comparison_of_calculated_and_official_UMO_transport_series.png) 
 
-This figure shows the comparison between the calculated UMO transport timeseries and official product. The 2 series shows very similar fluctuations, and apprently, the calclated one always higher than the official product, with the calcualted data occasionally appearing more aggressive. 
+This figure shows the comparison between the calculated UMO transport timeseries and official product. The 2 series shows very similar fluctuations, and obviously, the calclated one always higher than the official product, with the calcualted data occasionally appearing more aggressive. 
 
 Here is a table showing the results from the correlation analysis:
 
@@ -63,6 +63,10 @@ $$
 
 The second figure shows that the fit line shifts a lot from the 1:1 reference line. The slope of 0.47 indicates that the calculated data has roughly twice the amplitude of the official data. Besides, the intercept of -12 Sv matches the systematic bias discussed above.
 
+>Q: Why the uppper mid-ocean is not a full-depth integral?
+>
+>A: At first, UMO happens in the upper layer between the surface and around 1100m depth, with 2 water masses(UNADW and LNADW) down below. Secondly, if we do the full-depth integral, the results will not tell us each layer's contribution separately.
+
 
 ### Part 2 Evaluating time series
 
@@ -80,7 +84,7 @@ After filtering out the seasonal effects, the residual anomalies will provide a 
 
 The timeseries shows that the amplitude of the UMO series shrinks noticeably after deseasonalization.
 
-The following figures shows the results of the autocorrelation for both the MOC and UMO timeseries.
+The following figures depict the results of the autocorrelation for both the MOC and UMO timeseries.
 
 ![MOC Autocorrelation with T*](figures/Part2A.2_MOC_autocorrelation_with_t_int.png)
 ![UMO Autocorrelation with T*](figures/Part2A.2_UMO_autocorrelation_with_t_int.png)
@@ -136,9 +140,48 @@ therefore the two series need to be resampled on a common time grid before cross
 ![Before and After Matching figure](figures/Part2B.1_26MOC_and_47_MOC_before_and_after_matching.png)
 
 
-The following figure shows the cross-correlation results for the resampled 26°N and 47°N MOC timeseries. 
+The following figure depict the cross-correlation results for the resampled 26°N and 47°N MOC timeseries. 
 
 ![Cross-Correlation 26°N and 47°N MOC](figures/Part2B.2_26MOC_and_47_MOC_cross_correlation.png)
+
+After removing the seasonal cycles, the positive cross-correlation peaks from $\tau = -100$ to $\tau = 0$ are significantly attenuatted. Without the effect of seasonal driving, the fluctuations seem more centralised.
+
+| Variable | Peak Lag ($\tau$) | Correlation Coefficient ($r$) |
+| :--- | :--- | :--- |
+| **Raw** | 12 months | 0.227 |
+| **Deseasonalised** | 32 months | 0.222 |
+
+Besides, the deseasonalised peak lag reaches 32 months, which is nearly 3 times that of the raw series. This implies that the underlying signal takes 32 months to be propagated from 47°N to 26°N.
+
+If peak_lag > 0 (y leads x), we remove the last 32 months of x and the beginning 32 months of y, and generate a point-by-point scatter plot.
+
+![Scatter at Peak Lag for the Raw and the Deseasonalised data](figures/Part2B.2_26MOC_and_47_MOC_raw_and_deseasonalised_scatter_at_the_peak_lag.png)
+
+The two subplots reveal a weak relation between the 26°N and 47°N MOC timeseries. Futhermore, the linear trends have reversed directions, the raw series shows a positive slope, whereas the deseasonalised one demonstrates a negative slope overall.
+
+For the deseasonalised:
+
+| Variable | value | Description / Threshold |
+| :--- | :--- | :--- |
+| **Effective Sample Size ($N_{\text{eff}}$)** | 48.132 | Accounts for autocorrelation in the series |
+| **95% Critical $r$** | 0.284 | Significance threshold at the 95% confidence level |
+| **Peak $r$** | 0.222 | Maximum cross-correlation coefficient |
+| **Significant** | `False` | Peak $r$ < Critical $r$
+
+Clearly, the result lacks statistical significance. Therefore, it is only suggestive rather than a concrete conclusion.
+
+### Part 3 Depth Sensitivity Analysis
+
+The analysis used the RAPID 26°N boundary hydrography to compute the UMO integral transport based on difference maximum depth.
+
+![Depth Sensitivity of 26°N UMO Transport](figures/Part3_depth_sensitivity_of_26UMO_transport.png)
+
+Obviously, as the integration depth goes deeper, the calculated transport gets larger. However, the official product provides the smallest transport, because it accounts for the negative compensation transport as we discussed in Part 1.
+
+Allowing the integration depth to vary over time is very essential, because the lower boundary of the UMO layer changes under the influence of AAIW. 
+
+From Oct to Jan, AAIW goes northward, deepening the northward upperlayer, requiring the max depth to be set around 1100m during the period. From Mar to Jun, as the influence of AAIW decays, the max depth decreases to around 700m.
+
 
 
 

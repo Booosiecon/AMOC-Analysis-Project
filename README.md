@@ -1,9 +1,9 @@
 # AMOC Analysis Assignment2
 
-> 📊 Data analysis for physical oceanography - Geostrophic transport and relating AMOC series
+> 📈 Data analysis for physical oceanography - Geostrophic transport and relating AMOC series
 
 
-## Project Structure
+## 📌 Project Structure
 ```
 amoc-analysis/
 ├── venv1/                     # venv environment
@@ -41,17 +41,29 @@ amoc-analysis/
 └── writeup.md                 # write-up
 ```
 
+## ✅ Aim
+
+- Compute the 26°N UMO geostrophic transport, compare it with the official UMO product, and compute the correlation coefficient between calcualted UMO transport and the official UMO transport timeseries.
+
+- Calculate and illustrate the monthly climatology of both the 26°N MOC and UMO transport series. Plot the raw and deseasonalised figures for both timeseries.
+
+- Perform an autocorrelation with T* marked, fit a linear trend for both the 26°N MOC and UMO transports series, and find the significance based on $N_eff$.
+
+- Match 2 series, 26°N MOC and 47°N MOC to show a cross-correlation analysis for after removing their seasonal cycles. Draw scatter plots at the peak lag for both raw and deseasonalised data. Evaluate the significance.
+
+- Perform a depth sensitivity analysis for the 26°N UMO transport to assess the effect of different max depths on the integrated transport values.
 
 ---
 
-## 📊 Data | ts_gridded.nc
+## ⏳ Data 
 
-The assignment uses boundary hydrography data from the RAPID-MOCHA array at 26°N. Data will be automatically downloaded when you run the analysis functions. Because of the bad internet connection, sometimes the download fails. The dataset includes:
+1. `ts_gridded.nc`. Link: [rapid.ac.uk/data/gridded-mooring-data](https://rapid.ac.uk/data/gridded-mooring-data)
 
-- **Time series / Period**: 2004-present (depending on the run)
-- **Variables**: Boundary potential temperature and salinity profiles (`TEMP_`, `PSAL`) at the Western and Eastern boundaries on pressure coordinates.
-- **Resolution**: Gridded depth/pressure profiles used for thermal wind calculation.
-- **Units**: Practical Salinity Unit (PSU) for salinity, degrees Celsius (°C) for temperature, dbar/m for pressure.
+    - The gridded mooring data contains 5 vertical profiles, and all profiles comtain timeseries of 12-hourly temperature and salinity data gridded onto 20m intervals starting in Apr 2004.
+
+2. `moc_transports.nc`. Link: [rapid.ac.uk/data/integrated-transports](https://rapid.ac.uk/data/integrated-transports)
+
+    - 12-hourly, 10-days low pass filtered transport timeseries from Apr 2004 to Mar 2024.
 
 
 ---

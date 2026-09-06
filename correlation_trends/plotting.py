@@ -434,7 +434,7 @@ def plot_cross_relation_comparison(
         fontsize = 16,
         fontweight = "bold",
     )
-    ax.set_xlabel("Lag $\\tau$ (month) (Positive $\\to$ y leads x)", fontsize = 14)
+    ax.set_xlabel("Lag $\\tau$ (month) (Positive $\\to$ 47° leads 26°)", fontsize = 14)
     ax.set_ylabel("Normalised Cross-Correlation $r$", fontsize = 14)
     ax.grid(True, linestyle="--", alpha = 0.5)
     ax.legend(loc = "best", frameon = True, fontsize = 12)
@@ -458,7 +458,7 @@ def plot_lagged_scatter(
     x = np.asarray(x_series, float)
     y = np.asarray(y_series, float)
 
-    # if peak_lag > 0 (y leads x), x is shifted
+    # if peak_lag > 0 (y leads x), remove the last 32 months of x and the beginning 32 months of y
     if peak_lag > 0:
         x_aligned = x[:-peak_lag]
         y_aligned = y[peak_lag:]
