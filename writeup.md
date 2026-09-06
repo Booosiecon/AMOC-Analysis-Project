@@ -1,4 +1,4 @@
-# Assignment 2 Geostrophic transport and relating AMOC series -- report
+# Assignment 2 Report | Geostrophic transport and relating AMOC series
 
 - **Author** : Hengxi Yang
 - **Date** : Sep 2026
@@ -61,4 +61,69 @@ $$
 
 ![UMO Transport Regression Analysis](figures/Part1_UMO_regression_analysis.png)
 
-The second figure shows that the fit line shifts a lot from the 1:1 reference line. The slope of 0.47 indicates that the calculated data has roughly twice the amplitude of the official data. Besides, the intercept of -12 Sv aligns with the systematic bias discussed above.
+The second figure shows that the fit line shifts a lot from the 1:1 reference line. The slope of 0.47 indicates that the calculated data has roughly twice the amplitude of the official data. Besides, the intercept of -12 Sv matches the systematic bias discussed above.
+
+
+### Part 2 Evaluating time series
+
+#### 2A Seasonal cycle and trend (for both the 26°N MOC and UMO)
+
+![MOC and UMO monthly climatology](figures/Part2A.1_MOC_and_UMO_Monthly_Climatology.png)
+
+This climatology figures indicates that the MOC transport increases from April to June and decreases from Nov to March. Meanwhile, the UMO transport keeps stable from Jan to July, and decreases sharply starting from Aug.
+
+MOC and UMO transports have significant seasonal cycles. To calculate correlation timescales T* and the effective sample size $N_{eff}$, deseasonalisation is necessary. 
+
+After filtering out the seasonal effects, the residual anomalies will provide a more reliable estimation of T*. (The overall mean is remained, but the `autocorr` function uses `d  d-d.mean` to remove the mean when computing r and T*.)
+
+![MOC & UMO raw & deseasonalised series](figures/Part2A.1_MOC_and_UMO_raw_and_deseasonalised_series.png)
+
+The timeseries shows that the amplitude of the UMO series shrinks noticeably after deseasonalization.
+
+The following figures shows the results of the autocorrelation for both the MOC and UMO timeseries.
+
+![MOC Autocorrelation with T*](figures/Part2A.2_MOC_autocorrelation_with_t_int.png)
+![UMO Autocorrelation with T*](figures/Part2A.2_UMO_autocorrelation_with_t_int.png)
+
+
+| Variable | Integral Timescale ($T^*$) |
+| :--- | :--- |
+| **MOC** | 18.64 days |
+| **UMO** | 60.58 days |
+
+MOC has a much shorter T* relative to UMO according to the figures and the table above.
+
+$$
+\begin{aligned}
+\text{UMO} = \text{Upper Geostrophic Transport}  + &\text{Compensation Transport} \\
+\text{MOC} = \text{FC} + \text{Ek} & + \text{UMO}
+\end{aligned}
+$$
+
+As the total sum of full-depth integrated transport, MOC manifests greater variability and high-frequency fluctuations. Therefore, its autocorrelation decays faster than that of UMO, which makes sense.
+
+Here is a table showing the results from the linear regression trend analysis:
+
+| Parameter | MOC | UMO |
+| :--- | :--- | :--- |
+| **Fitted Slope** | $-0.093\text{ Sv/yr}$ | $-0.109\text{ Sv/yr}$ |
+| **Intercept** | $+17.903\text{ Sv}$ | $-17.274\text{ Sv}$ |
+| **Naive Standard Error** | $0.006\text{ Sv/yr}$ | $0.004\text{ Sv/yr}$ |
+| **Effective Standard Error** | $0.047\text{ Sv/yr}$ | $0.036\text{ Sv/yr}$ |
+| **Effective Sample Size ($N_{\text{eff}}$)** | $223.933$ | $190.693$ |
+| **Slope / Std. Error** | $-1.960$ | $-3.025$ |
+| **P-value** | $5.12 \times 10^{-2}$| $2.83 \times 10^{-3}$ |
+| **Significant (95%)** | **No** ($p > 0.05$) | **Yes** ($p < 0.05$) |
+
+The average value of MOC decreases by 0.093 Sv for each year, while UMO decreases by 0.109 Sv annually. However, when we focus on the timeseries itself, it doesn't indicate a decreasing trend because strong noise masks it.
+
+The project uses the `effective_dof` function to compute $N_{eff} ≈ 224$ for MOC and $N_{eff} ≈ 191$ for UMO. Compared with the original sample size $N = 14,599$, the effective sample size drops a lot due to autocorrelation.
+
+Additionally, the p value of MOC exceeds 0.05, which means the trend lacks significance and it shouldn't be treated as a concrete conclusion.
+
+
+#### 2B Cross-correlation of 26°N and 47°N MOC
+
+
+
+

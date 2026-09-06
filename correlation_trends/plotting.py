@@ -220,10 +220,10 @@ def plot_raw_vs_deseasonalised(
     )
     ax1.set_ylabel("Transport (Sv)", fontsize = 16)
     ax1.set_title(
-        "MOC Raw and Deseasonalise Series (26°N)", fontsize = 18, fontweight = "bold"
+        "MOC Raw and Deseasonalised Series (26°N)", fontsize = 18, fontweight = "bold"
     )
     ax1.grid(True, linestyle = "--", alpha = 0.5)
-    ax1.legend(loc = "best", frameon = True)
+    ax1.legend(loc = "best", fontsize = 14, framealpha = 0.0)
 
     # UMO comparison
     ax2.plot(
@@ -240,10 +240,10 @@ def plot_raw_vs_deseasonalised(
     ax2.set_ylabel("Transport (Sv)", fontsize = 16)
     ax2.set_ylim(-32, -5)
     ax2.set_title(
-        "UMO Raw and Deseasonalise Series (26°N)", fontsize = 18, fontweight = "bold"
+        "UMO Raw and Deseasonalised Series (26°N)", fontsize = 18, fontweight = "bold"
     )
     ax2.grid(True, linestyle = "--", alpha = 0.5)
-    ax2.legend(loc = "best", frameon = True)
+    ax2.legend(loc = "best", fontsize = 14, framealpha = 0.0)
 
     fig.tight_layout()
     return fig, (ax1, ax2)
