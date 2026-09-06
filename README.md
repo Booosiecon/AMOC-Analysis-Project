@@ -6,7 +6,6 @@
 ## 📌 Project Structure
 ```
 amoc-analysis/
-├── venv1/                     # venv environment
 ├── notebooks/                 # Jupyter notebooks for analysis         
 │   └──  Assignment2.ipynb
 ├── amoc_analysis/             # Analysis for assignment1
